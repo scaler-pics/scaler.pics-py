@@ -5,13 +5,13 @@ A Python library for image scaling and conversion.
 ## Installation
 
 ```sh
-pip install scaler
+pip install scaler-pics
 ```
 
 ## Usage
 
 ```python
-from scaler.scaler import Scaler, TransformOptions, InputOptions, OutputOptions, Fit, ImageDelivery
+from scaler-pics import Scaler, TransformOptions, InputOptions, OutputOptions, Fit, ImageDelivery
 
 # Initialize the Scaler instance with the API key
 scaler = Scaler(api_key='your_api_key')
