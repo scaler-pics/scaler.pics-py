@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='scaler_pics',
-    version='0.1.0',
+    name='scaler-pics',
+    version='0.1.1',
     description='A Python library for image scaling and conversion',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
