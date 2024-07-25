@@ -65,10 +65,11 @@ class TransformOptions:
 
 
 class InputOptions:
-    def __init__(self, remoteUrl=None, localPath=None, buffer=None):
+    def __init__(self, remoteUrl=None, localPath=None, buffer=None, fileName=None):
         self.remoteUrl = remoteUrl
         self.localPath = localPath
         self.buffer = buffer
+        self.fileName = fileName
 
 
 class ImageDelivery:
@@ -127,7 +128,7 @@ class Scaler:
             outputs = [ApiOutput(out.fit, out.type, out.quality, out.imageDelivery.upload if out.imageDelivery and hasattr(
                 out.imageDelivery, 'upload') else None, out.crop) for out in outs]
             options2 = ApiTransformOptions(
-                options.input.remoteUrl or 'body', outputs)
+                self.get_input_scheme(options.input), outputs)
 
             startSignUrl = time.time()
             async with session.post(signUrl, headers={
@@ -270,6 +271,22 @@ class Scaler:
                 raise ValueError(
                     f'Failed to download image. status: {res.status}, text: {text}')
             return await res.read()
+
+    def get_input_scheme(input_options):
+        if input_options.remoteUrl:
+            return input_options.remoteUrl
+
+        if input_options.localPath:
+            file_name = os.path.basename(input_options.localPath)
+            return f'body:{file_name}'
+
+        if input_options.buffer and input_options.fileName:
+            return f'body:{input_options.fileName}'
+
+        if input_options.buffer:
+            return 'body'
+
+        raise ValueError('No input provided')
 
 
 # Environment Variables
