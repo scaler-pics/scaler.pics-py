@@ -1,6 +1,6 @@
 # Scaler
 
-A Python library for image scaling and conversion.
+A Python library for image scaling, conversion and document thumbnail generation.
 
 ## Installation
 
@@ -31,3 +31,5 @@ options = TransformOptions(
 response = scaler.transform(options)
 print(response)
 ```
+
+Get API key from [Scaler](https://scaler.pics)
